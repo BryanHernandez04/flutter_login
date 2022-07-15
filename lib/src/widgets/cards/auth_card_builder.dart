@@ -31,6 +31,7 @@ part 'login_card.dart';
 part 'recover_card.dart';
 part 'recover_confirm_card.dart';
 part 'signup_confirm_card.dart';
+part 'login_confirm_card.dart';
 
 class AuthCard extends StatefulWidget {
   const AuthCard(
@@ -82,12 +83,14 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
   final GlobalKey _additionalSignUpCardKey = GlobalKey();
   final GlobalKey _confirmRecoverCardKey = GlobalKey();
   final GlobalKey _confirmSignUpCardKey = GlobalKey();
+  final GlobalKey _confirmLoginCardKey = GlobalKey();
 
   static const int _loginPageIndex = 0;
   static const int _recoveryIndex = 1;
   static const int _additionalSignUpIndex = 2;
   static const int _confirmSignup = 3;
   static const int _confirmRecover = 4;
+  static const int _confirmLogin = 5;
 
   int _pageIndex = _loginPageIndex;
 
@@ -332,7 +335,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
                 _changeCard(_additionalSignUpIndex),
             onSubmitCompleted: () {
               if (auth.onConfirmSignup != null) {
-                _changeCard(_confirmSignup);
+                _changeCard(_confirmLogin);
               } else {
                 _forwardChangeRouteAnimation(_loginCardKey).then((_) {
                   widget.onSubmitCompleted!();
@@ -340,7 +343,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
               }
             },
             requireSignUpConfirmation: auth.onConfirmSignup != null,
-            onSwitchConfirmSignup: () => _changeCard(_confirmSignup),
+            onSwitchConfirmSignup: () => _changeCard(_confirmLogin),
             hideSignUpButton: widget.hideSignUpButton,
             hideForgotPasswordButton: widget.hideForgotPasswordButton,
             loginAfterSignUp: widget.loginAfterSignUp,
@@ -418,6 +421,28 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
               }
             },
             loginAfterSignUp: widget.loginAfterSignUp,
+          ),
+        );
+
+      case _confirmLogin:
+        return _buildLoadingAnimator(
+          theme: Theme.of(context),
+          child: _ConfirmLoginCard(
+            key: _confirmLoginCardKey,
+            onBack: () => auth.additionalSignupData == null
+                ? _changeCard(_loginPageIndex)
+                : _changeCard(_additionalSignUpIndex),
+            loadingController: formController,
+            onSubmitCompleted: () {
+              if (widget.loginAfterSignUp) {
+                _forwardChangeRouteAnimation(_confirmLoginCardKey).then((_) {
+                  widget.onSubmitCompleted!();
+                });
+              } else {
+                _changeCard(_loginPageIndex);
+              }
+            },
+            loginAfterSignUp: true,
           ),
         );
     }
