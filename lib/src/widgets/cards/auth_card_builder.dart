@@ -331,9 +331,13 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
             onSwitchSignUpAdditionalData: () =>
                 _changeCard(_additionalSignUpIndex),
             onSubmitCompleted: () {
-              _forwardChangeRouteAnimation(_loginCardKey).then((_) {
-                widget.onSubmitCompleted!();
-              });
+              if (auth.onConfirmSignup != null) {
+                _changeCard(_confirmSignup);
+              } else {
+                _forwardChangeRouteAnimation(_loginCardKey).then((_) {
+                  widget.onSubmitCompleted!();
+                });
+              }
             },
             requireSignUpConfirmation: auth.onConfirmSignup != null,
             onSwitchConfirmSignup: () => _changeCard(_confirmSignup),
