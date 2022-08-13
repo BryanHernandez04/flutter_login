@@ -119,9 +119,6 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    _pageIndex =
-        widget.startingIndex == 0 ? _loginPageIndex : widget.startingIndex;
-
     widget.loadingController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _isLoadingFirstTime = false;
@@ -490,6 +487,8 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
+    _pageIndex =
+        widget.startingIndex == 0 ? _loginPageIndex : widget.startingIndex;
 
     Widget current = Container(
       height: deviceSize.height,
