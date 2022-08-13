@@ -45,6 +45,7 @@ class Auth with ChangeNotifier {
       this.onRecoverPassword,
       this.onConfirmRecover,
       this.onConfirmSignup,
+      this.startingIndex,
       this.onResendCode,
       String email = '',
       String password = '',
@@ -54,7 +55,8 @@ class Auth with ChangeNotifier {
       : _email = email,
         _password = password,
         _confirmPassword = confirmPassword,
-        _mode = initialAuthMode;
+        _mode = initialAuthMode,
+        currentCardIndex = startingIndex;
 
   final LoginCallback? onLogin;
   final SignupCallback? onSignup;
@@ -62,6 +64,7 @@ class Auth with ChangeNotifier {
   final List<LoginProvider> loginProviders;
   final ConfirmRecoverCallback? onConfirmRecover;
   final ConfirmSignupCallback? onConfirmSignup;
+  final int startingIndex;
   final SignupCallback? onResendCode;
   final List<TermOfService> termsOfService;
 
