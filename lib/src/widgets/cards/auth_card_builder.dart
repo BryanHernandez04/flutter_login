@@ -52,6 +52,7 @@ class AuthCard extends StatefulWidget {
       this.disableCustomPageTransformer = false,
       this.loginTheme,
       this.navigateBackAfterRecovery = false,
+      this.startingIndex = 0,
       required this.scrollable})
       : super(key: key);
 
@@ -66,6 +67,7 @@ class AuthCard extends StatefulWidget {
   final bool loginAfterSignUp;
   final LoginUserType userType;
   final bool hideProvidersTitle;
+  final int startingIndex;
 
   final List<UserFormField>? additionalSignUpFields;
 
@@ -95,7 +97,8 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
   static const int _confirmLogin = 5;
   static const int _newPassword = 6;
 
-  int _pageIndex = _loginPageIndex;
+  int _pageIndex =
+      widget.startingIndex == 0 ? _loginPageIndex : widget.startingIndex;
 
   var _isLoadingFirstTime = true;
   static const cardSizeScaleEnd = .2;
