@@ -45,12 +45,12 @@ class Auth with ChangeNotifier {
       this.onRecoverPassword,
       this.onConfirmRecover,
       this.onConfirmSignup,
-      this.startingIndex,
       this.onResendCode,
       String email = '',
       String password = '',
       String confirmPassword = '',
       AuthMode initialAuthMode = AuthMode.login,
+      this.startingIndex = 0,
       this.termsOfService = const []})
       : _email = email,
         _password = password,
