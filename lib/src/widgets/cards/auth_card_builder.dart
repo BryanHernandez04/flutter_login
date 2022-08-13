@@ -97,8 +97,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
   static const int _confirmLogin = 5;
   static const int _newPassword = 6;
 
-  int _pageIndex =
-      widget.startingIndex == 0 ? _loginPageIndex : widget.startingIndex;
+  int _pageIndex = _loginPageIndex;
 
   var _isLoadingFirstTime = true;
   static const cardSizeScaleEnd = .2;
@@ -119,6 +118,9 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
+    _pageIndex =
+        widget.startingIndex == 0 ? _loginPageIndex : widget.startingIndex;
 
     widget.loadingController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
