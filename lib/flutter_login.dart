@@ -793,27 +793,27 @@ class _FlutterLoginState extends State<FlutterLogin>
                   children: <Widget>[
                     Positioned(
                       child: AuthCard(
-                        key: authCardKey,
-                        userType: widget.userType,
-                        padding: EdgeInsets.only(top: cardTopPosition),
-                        loadingController: _loadingController,
-                        userValidator: userValidator,
-                        passwordValidator: passwordValidator,
-                        onSubmit: _reverseHeaderAnimation,
-                        onSubmitCompleted: widget.onSubmitAnimationCompleted,
-                        hideSignUpButton: widget.onSignup == null,
-                        hideForgotPasswordButton:
-                            widget.hideForgotPasswordButton,
-                        loginAfterSignUp: widget.loginAfterSignUp,
-                        hideProvidersTitle: widget.hideProvidersTitle,
-                        additionalSignUpFields: widget.additionalSignupFields,
-                        disableCustomPageTransformer:
-                            widget.disableCustomPageTransformer,
-                        loginTheme: widget.theme,
-                        navigateBackAfterRecovery:
-                            widget.navigateBackAfterRecovery,
-                        scrollable: widget.scrollable,
-                      ),
+                          key: authCardKey,
+                          userType: widget.userType,
+                          padding: EdgeInsets.only(top: cardTopPosition),
+                          loadingController: _loadingController,
+                          userValidator: userValidator,
+                          passwordValidator: passwordValidator,
+                          onSubmit: _reverseHeaderAnimation,
+                          onSubmitCompleted: widget.onSubmitAnimationCompleted,
+                          hideSignUpButton: widget.onSignup == null,
+                          hideForgotPasswordButton:
+                              widget.hideForgotPasswordButton,
+                          loginAfterSignUp: widget.loginAfterSignUp,
+                          hideProvidersTitle: widget.hideProvidersTitle,
+                          additionalSignUpFields: widget.additionalSignupFields,
+                          disableCustomPageTransformer:
+                              widget.disableCustomPageTransformer,
+                          loginTheme: widget.theme,
+                          navigateBackAfterRecovery:
+                              widget.navigateBackAfterRecovery,
+                          scrollable: widget.scrollable,
+                          startingIndex: widget.startingIndex),
                     ),
                     Positioned(
                       top: cardTopPosition - headerHeight - headerMargin,

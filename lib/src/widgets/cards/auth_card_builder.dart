@@ -489,7 +489,6 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
     final deviceSize = MediaQuery.of(context).size;
     _pageIndex =
         widget.startingIndex == 0 ? _loginPageIndex : widget.startingIndex;
-
     Widget current = Container(
       height: deviceSize.height,
       width: deviceSize.width,
@@ -497,7 +496,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
       child: TransformerPageView(
         physics: const NeverScrollableScrollPhysics(),
         pageController: _pageController,
-        itemCount: 5,
+        itemCount: 7,
 
         /// Need to keep track of page index because soft keyboard will
         /// make page view rebuilt
