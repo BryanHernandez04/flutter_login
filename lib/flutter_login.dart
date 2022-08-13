@@ -301,6 +301,7 @@ class FlutterLogin extends StatefulWidget {
       this.savedEmail = '',
       this.savedPassword = '',
       this.initialAuthMode = AuthMode.login,
+      this.startingIndex = 0,
       this.children,
       this.scrollable = false})
       : assert((logo is String?) || (logo is ImageProvider?)),
@@ -416,6 +417,9 @@ class FlutterLogin extends StatefulWidget {
   /// The initial auth mode for the widget to show. This defaults to [AuthMode.login]
   /// if not specified. This field can allow you to show the sign up state by default.
   final AuthMode initialAuthMode;
+
+  /// Initial index: refers to the page to load initially.
+  final int startingIndex;
 
   /// Supply custom widgets to the auth stack such as a custom logo widget
   final List<Widget>? children;
@@ -731,7 +735,7 @@ class _FlutterLoginState extends State<FlutterLogin>
         widget.userValidator ?? FlutterLogin.defaultEmailValidator;
     final passwordValidator =
         widget.passwordValidator ?? FlutterLogin.defaultPasswordValidator;
-
+    final int startingIndex = widget.startingIndex;
     Widget footerWidget = const SizedBox();
     if (widget.footer != null) {
       footerWidget = Padding(
@@ -754,19 +758,19 @@ class _FlutterLoginState extends State<FlutterLogin>
         ),
         ChangeNotifierProvider(
           create: (context) => Auth(
-            onLogin: widget.onLogin,
-            onSignup: widget.onSignup,
-            onRecoverPassword: widget.onRecoverPassword,
-            loginProviders: widget.loginProviders,
-            email: widget.savedEmail,
-            password: widget.savedPassword,
-            confirmPassword: widget.savedPassword,
-            onConfirmRecover: widget.onConfirmRecover,
-            onConfirmSignup: widget.onConfirmSignup,
-            onResendCode: widget.onResendCode,
-            termsOfService: widget.termsOfService,
-            initialAuthMode: widget.initialAuthMode,
-          ),
+              onLogin: widget.onLogin,
+              onSignup: widget.onSignup,
+              onRecoverPassword: widget.onRecoverPassword,
+              loginProviders: widget.loginProviders,
+              email: widget.savedEmail,
+              password: widget.savedPassword,
+              confirmPassword: widget.savedPassword,
+              onConfirmRecover: widget.onConfirmRecover,
+              onConfirmSignup: widget.onConfirmSignup,
+              onResendCode: widget.onResendCode,
+              termsOfService: widget.termsOfService,
+              initialAuthMode: widget.initialAuthMode,
+              startingIndex: widget.startingIndex),
         ),
       ],
       child: Scaffold(
