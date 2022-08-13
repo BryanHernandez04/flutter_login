@@ -40,7 +40,8 @@ class _NewPassCard extends StatefulWidget {
   _NewPassCardState createState() => _NewPassCardState();
 }
 
-class _NewPassCardState extends State<_NewPassCard> with TickerProviderStateMixin {
+class _NewPassCardState extends State<_NewPassCard>
+    with TickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final _passwordFocusNode = FocusNode();
@@ -606,7 +607,7 @@ class _NewPassCardState extends State<_NewPassCard> with TickerProviderStateMixi
                 const SizedBox(height: 10),
               ],
             ),
-          ),,
+          ),
         ],
       ),
     );
