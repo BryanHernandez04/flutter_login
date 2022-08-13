@@ -84,6 +84,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
   final GlobalKey _confirmRecoverCardKey = GlobalKey();
   final GlobalKey _confirmSignUpCardKey = GlobalKey();
   final GlobalKey _confirmLoginCardKey = GlobalKey();
+  final GlobalKey _newPasswordCardKey = GlobalKey();
 
   static const int _loginPageIndex = 0;
   static const int _recoveryIndex = 1;
@@ -91,6 +92,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
   static const int _confirmSignup = 3;
   static const int _confirmRecover = 4;
   static const int _confirmLogin = 5;
+  static const int _newPassword = 6;
 
   int _pageIndex = _loginPageIndex;
 
@@ -342,6 +344,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
                 });
               }
             },
+            onSwitchNewPassword: () => _changeCard(_newPassword),
             requireSignUpConfirmation: auth.onConfirmSignup != null,
             onSwitchConfirmSignup: () => _changeCard(_confirmLogin),
             hideSignUpButton: widget.hideSignUpButton,
@@ -392,6 +395,35 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
               }
             },
           ),
+        );
+
+      case _newPassword:
+        return _NewPassCard(
+          key: _newPasswordCardKey,
+          userType: widget.userType,
+          loadingController: formController,
+          userValidator: widget.userValidator,
+          passwordValidator: widget.passwordValidator,
+          requireAdditionalSignUpFields: widget.additionalSignUpFields != null,
+          onSwitchRecoveryPassword: () => _changeCard(_recoveryIndex),
+          onSwitchSignUpAdditionalData: () =>
+              _changeCard(_additionalSignUpIndex),
+          onSubmitCompleted: () {
+            if (auth.onConfirmSignup != null) {
+              _changeCard(_confirmLogin);
+            } else {
+              _forwardChangeRouteAnimation(_loginCardKey).then((_) {
+                widget.onSubmitCompleted!();
+              });
+            }
+          },
+          onSwitchNewPassword: () => _changeCard(_newPassword),
+          requireSignUpConfirmation: auth.onConfirmSignup != null,
+          onSwitchConfirmSignup: () => _changeCard(_confirmLogin),
+          hideSignUpButton: widget.hideSignUpButton,
+          hideForgotPasswordButton: widget.hideForgotPasswordButton,
+          loginAfterSignUp: widget.loginAfterSignUp,
+          hideProvidersTitle: widget.hideProvidersTitle,
         );
 
       case _confirmRecover:

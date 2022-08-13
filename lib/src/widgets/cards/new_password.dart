@@ -1,7 +1,7 @@
 part of auth_card_builder;
 
-class _LoginCard extends StatefulWidget {
-  const _LoginCard({
+class _NewPassCard extends StatefulWidget {
+  const _NewPassCard({
     Key? key,
     required this.loadingController,
     required this.userValidator,
@@ -37,10 +37,10 @@ class _LoginCard extends StatefulWidget {
   final bool requireSignUpConfirmation;
 
   @override
-  _LoginCardState createState() => _LoginCardState();
+  _NewPassCardState createState() => _NewPassCardState();
 }
 
-class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
+class _NewPassCardState extends State<_NewPassCard> with TickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final _passwordFocusNode = FocusNode();
@@ -606,56 +606,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
                 const SizedBox(height: 10),
               ],
             ),
-          ),
-          ExpandableContainer(
-            backgroundColor: _switchAuthController.isCompleted
-                ? null
-                : theme.colorScheme.secondary,
-            controller: _switchAuthController,
-            initialState: isLogin
-                ? ExpandableContainerState.shrunk
-                : ExpandableContainerState.expanded,
-            alignment: Alignment.topLeft,
-            color: theme.cardTheme.color,
-            width: cardWidth,
-            padding: const EdgeInsets.symmetric(horizontal: cardPadding),
-            onExpandCompleted: () => _postSwitchAuthController.forward(),
-            child: Column(children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child:
-                    _buildConfirmPasswordField(textFieldWidth, messages, auth),
-              ),
-              for (var e in auth.termsOfService)
-                TermCheckbox(
-                  termOfService: e,
-                  validation: auth.isSignup,
-                ),
-            ]),
-          ),
-          Container(
-            padding: Paddings.fromRBL(cardPadding),
-            width: cardWidth,
-            child: Column(
-              children: <Widget>[
-                !widget.hideForgotPasswordButton
-                    ? _buildForgotPassword(theme, messages)
-                    : SizedBox.fromSize(
-                        size: const Size.fromHeight(16),
-                      ),
-                _buildSubmitButton(theme, messages, auth),
-                !widget.hideSignUpButton
-                    ? _buildSwitchAuthButton(theme, messages, auth, loginTheme)
-                    : SizedBox.fromSize(
-                        size: const Size.fromHeight(10),
-                      ),
-                auth.loginProviders.isNotEmpty && !widget.hideProvidersTitle
-                    ? _buildProvidersTitleFirst(messages)
-                    : Container(),
-                _buildProvidersLogInButton(theme, messages, auth, loginTheme),
-              ],
-            ),
-          ),
+          ),,
         ],
       ),
     );
