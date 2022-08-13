@@ -32,6 +32,7 @@ part 'recover_card.dart';
 part 'recover_confirm_card.dart';
 part 'signup_confirm_card.dart';
 part 'login_confirm_card.dart';
+part 'new_password.dart';
 
 class AuthCard extends StatefulWidget {
   const AuthCard(
